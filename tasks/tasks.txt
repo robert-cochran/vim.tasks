@@ -1,0 +1,376 @@
+tasks.txt
+
+    TASK!:      task.230213.213422.txt
+    TASK!:      task.230219.145955.txt
+    TASK!:      task.230219.171717.txt
+    TASK!:      task.230219.175226.txt
+    TASK!:      task.230219.194733.txt
+    TASK!:      task.230219.195137.txt
+    TASK!:      task.230219.195723.txt
+    TASK!:      task.230219.200059.txt
+    TASK!:      task.230219.200222.txt
+    TASK!:      task.230219.200218.txt
+    TASK!:      task.230219.200336.txt
+    TASK!:      task.230219.200827.txt
+    TASK!:      task.230219.201024.txt
+    TASK!:      task.230219.201454.txt
+    TASK!:      task.230220.210613.txt
+    TASK!:      task.230220.211930.txt
+    TASK!:      task.230220.214429.txt
+    TASK!:      task.230224.152503.txt
+    
+
+SEARCH.TAGGING
+
+    IDEA:       a way to help with finding information could be a tagging system 
+                for certain lines that might be helpful in a glossary somewhere, 
+                if a line (or blobk) is help it could be tagged with #DEBUG or 
+                #IMPORTANT and at the end of the document all tags or shown in 
+                blocks with the tagged lines/blocks
+    
+VISUAL.OUTLINE
+
+    IDEA:       can also use an old idea I had of being able to quickly visually 
+                deliniate nested blocks using colours, I would try to avoid the ad 
+                nauseum nesting I liked back then, but instead could use a bounding
+                box around indentend content (say a FIX for an ERROR or WARNING, 
+                and the naturally nested nature of troubleshooting)
+
+    FEATURE:    strip of white thats a single character long and only along
+                the first letter column of the field column to help visually 
+                connect the test to the outcome
+                reason is coming up with differnet colours is starting to 
+                flood the page with too much visual noise, starting to get
+                hard again to quickly tell where i am and whats going on 
+                (which was the initial problem that colours were supposed to 
+                solve). very shannon entropy like. need to find that sweet spot
+                of information.
+    
+    ISSUE       Need a good system for knowing where certain 'groups' start and 
+                end in a task. Similar to the section, subtask denoting a
+                separate group of items to the others in the task, but I need
+                to come up with a good way to also show when those end visually.
+                Maybe something like the first character column inbetween the 
+                groups header and footer could have a different colour.
+                or maybe even sending them to their own file and linking to
+                them instead
+
+    QUESTION    SECTION vs SUBTASK vs TASK vs SUBSECTION vs TEST
+                what is a section? a collection of tests? are sections vs 
+                subtasks clearly deliniated? 
+                whats the point of all these terms? i guess it can be thought 
+                of as another way to fold sections quickly. it can help with
+                seeing a grouping but if theres too many of these it becomes
+                cumbersome to look at and try to see the difference or to use
+                brain power to try to figure out which one to use in the given
+                context. having extra information is nice but if im not using 
+                it to do anything else and its visually distracting it needs
+                to serve some kind of purpose
+                
+                really what im asking here is what are the bounds of the visual
+                space were in to convey information quickly. having a single
+                row of CAPS is great in a sea of lower case for drawing 
+                attention quickly, but if theres mixed cap already, as well
+                as colours for fg/bg, italic, bold, blocks of text, etc.. then
+                CAPS doesn't draw the eye anywhere near as quickly anymore.
+                what is the information bound of these patterns and when is
+                it too much. what is crucial and what is superfluous or just 
+                a nice to have. information theoretically too many things will
+                be the same as not having any at all, which defeats the point.
+
+FOLDING
+
+    FEATURE:    would be nice to be able to either fold stories/tasks/subtasks
+                away or have each of them become their own file that will
+                link back up to other files (org-mode seems to have the folding
+                tasks aspect, 
+                Idea being that each of these tasks and subtasks should be
+                written as self contained units with a beginning (context), 
+                middle (notes, debug, Q, TEST, OUTCOME, etc..) and end (STATUS).
+                that way I can keep track of tasks in their own window without
+                needing all the other subtasks and notes necessarily right next
+                to what my current task is. also makes it more standardised 
+                for templates
+
+    FEATURE:    folding up tests down to the next OUTCOME keyword
+    
+LINKING
+
+    FEATURE:    bidirectional links. vim wiki seems to have the bi-directional
+                links,
+
+LINKING.BACKLINKS
+
+    IDEA:       tagging various collections (single line, paragraph, whole block) 
+                of content and being able to bring them up either at the end of a 
+                file for only that files use of the tag (think roam research)
+                or as a seperate document that collects all uses
+                this is becoming more like a database program than a text editor 
+                now
+
+COLUMNS
+    
+    FEATURE:    editing the keyword (e.g. CTASK to TASK) doesnt change the
+                data's column line placement. (e.g. Changing TASK to CTASK
+                causes the task name to be shifted one extra space.
+                this could be solved if  delegated to a command 
+                that takes the line youre on (or the task block youre inside)
+                and looks for the keyword, and uses the REPLACE command over
+                the top once its found the first instance of TASK: or CTASK:
+                whicher youre changing to or from
+
+KEYWORDS.COUPLES
+
+    FEATURE:    change style of Q once an answer is written below it so that
+                it doesnt stick out as much anymore
+
+    FEATURE:    continuing on with the related ideas from above there should 
+                be a better way to show coupled items (e.g. test to outcome,
+                task to status, q to a, warning/error/debug to fix) such as 
+                visually connecting them, or maybe auto folding them, or maybe 
+                have their colour schemes change depending on the data in the 
+                coupled item (e.g. TASK colour might change colour if STATUS 
+                is SUCCESS, TEST colour might change to pending the OUTCOME 
+                colour (red, purple, green, etc.)) but no indenting. 
+                try to avoid indenting because it quickly leads to indenting 
+                hell where I have no idea what is a sibling or parent to what
+                anymore. 
+
+                i also need a more established system on which one ones are 
+                couples, if theyre monogomous, and when to use them
+
+TASKS.NEW
+
+    IDEA:       creating a new file from a long subtask changes the block to 
+                be a TASK itself. basically changing NewTask to handle subtasks
+                so that it doesnt change the name of SUBTASK in the original 
+                file
+                [original text] so if i had a long subtask and turned it 
+                into its own link then it would still be called a subtask
+                in the original task block, but the new block made for that 
+                subtask would have the header TASK instead of SUBTASK
+                idea being that subtasks only exist under a
+                task, and I dont want to chain subtask into subtask forever
+                this would help keep consistency and keep it simple for block 
+                types
+
+TASKS.PREVIEW
+
+    VIM-FEAT    A way to atomise tasks into their own files that I can then
+                send to different task collections. example, if I've finished 
+                a task then I want to send it from current into done, but only
+                sending the task preview in current to done. the actual task
+                txt would be left alone
+    
+    VIM-FEAT    The task collectors (e.g. task.done.txt, task.next.txt, etc.)
+                should really be thought of as displaying a little window of
+                the referenced tasks info out to the world.
+                and so all the tasks that show up in task.current.txt are all
+                the tasks that have been marked as CTASK in their own 
+                respective files
+                same with done tasks or backlogged tasks
+                Have no idea how this would be implemented in vim though lmao.
+                Maybe some of the vim/nvim wiki projects have this figured
+                out already
+                or a way to generate task.done.txt, task.backlog.txt,
+                task.next.txt etc based off the contents of the files in tasks
+    
+    FEATURE     be able to preview a file in a popup window might be a cool 
+                feature, but also might lead to unnecessary bloat. the idea
+                is there but really i should learn how to surf vim buffers 
+                better
+                see the dialog window function in vim h docs
+                https://github.com/mcchrish/nnn.vim
+    
+    ISSUE       Writing new tasks in files causes duplicate (and potentially 
+                outdated) information to be spread around (e.g. status of task,
+                current children of task, if the task is current or not)
+                Would be nice to have the data thats in those files get
+                populated in the tasks.next.txt automatically by a script 
+                either when a command is run, or when a file changed is 
+                noticed. maybe i could use something like rsync to monitor 
+                file changes and issue commands? should just do it manually 
+                for now to see that it works
+        SEE:    Skeleton files (skeleton.vim)
+        SEE:    template files
+        LINK:   https://github.com/tobyS/skeletons.vim
+        LINK:   https://www.sirver.net/blog/2011/12/30/first-episode-of-ultisnips-screencast/
+        LINK:   https://github.com/pgilad/vim-skeletons
+        LINK:   https://vimawesome.com/plugin/vim-skeleton
+        LINK:   https://shapeshed.com/vim-templates/#an-example-skeleton-file
+        LINK:   https://vi.stackexchange.com/questions/6358/how-do-i-add-skeleton-text-to-new-vim-files
+        LINK:   https://zactyh.medium.com/custom-vim-skeletons-file-templates-c6fe771012b3
+
+TASKS.PREVIEW/SYNCING
+
+    VIM-FEAT    When inside a task collection like tasks.current.txt and
+                I've referenced a task and its file below, I'd like a way to 
+                sync/link the task name used in either files to autoupdate 
+                the other
+                Same thing with the status of the task, if I've updated the
+                task.x.txt to have a status of done then itd be cool to have
+                that propogate up. Or maybe the value of status in the task
+                preview (inside tasks.current.txt) can be derived from the
+                referenced filename?
+
+FILE.DIR.OUTLINE
+
+    FEATURE:    opening a split left pane to show you what this task is
+                attached to? like its parents or anything that was blocked
+                by this task. getting a similar feeling to org roam with the
+                backlinks. might be overkill tbh
+
+SYNTAX.HIGHTLIGHTING.SPACES
+
+    VIM-FEAT    MINOR ISSUE: currently having trouble matching spaces when 
+                syntax highlighting TASK:, neither a " " or \s will work.
+                maybe these links will help in future
+                https://stackoverflow.com/questions/838979/unable-to-match-one-or-more-whitespaces-in-vim
+                https://stackoverflow.com/questions/48013018/how-to-syntax-highlight-multiple-space-separated-fields-in-vim
+                https://vi.stackexchange.com/questions/15850/why-does-vim-not-highlighting-leading-and-trailing-spaces
+                https://vi.stackexchange.com/questions/31176/matching-any-unicode-whitespace
+    
+KEYWORDS.RUN.COMMANDS
+
+    VIM-FEAT    for tasks/tests that have run commands underneath them it would
+                be cool to have a way to quickly run that command from vim
+    LINK        https://stackoverflow.com/questions/36956978/run-shell-command-on-visual-selection
+    LINK        https://stackoverflow.com/questions/4268532/how-to-execute-selected-text-as-vim-commands
+    LINK        https://www.jvt.me/posts/2022/03/03/vim-command-visual-selection
+       
+TEMPLATES/SKELETONS
+
+    VIM-FEAT    templates: when a new child/sub task is made a template can be
+                used to fill out infomation automatically
+    LINK        https://shapeshed.com/vim-templates/
+    LINK        https://stackoverflow.com/questions/3785320/how-to-use-a-template-in-vim
+    LINK        https://github.com/tibabit/vim-templates
+    LINK        https://stackoverflow.com/questions/55469524/how-to-write-vim-function-to-paste-a-template-text-into-current-file
+    
+    IDEA        could have a variable that is stored in a text file that 
+                basically acts as a skeleton for what data to read from 
+                what file and populates it whenever i open it in vim. 
+                filepath::KEYWORD and that would be parsed to look for 
+                the corresponding value and populate that files NAME and 
+                STATUS into my current file. could be used for the TODO and 
+                index files.
+
+
+
+MACROS
+
+    VIM-FEAT    macros that let me change the state of a task, like from task
+                to ctask/dtask/btask, or a todo from TODO to DONE, or a Q to
+                being ANSWERED
+                or an ERROR to a warning with a fix, things like that
+                i could use vip when inside the paragraph block to grab the 
+                block, then once visually selected it would be parsed for 
+                first line of TASK and change it to CTASK.
+                for keyword i could do something similar, setting up custom
+                movement to select a keyword and its contents so that I can 
+                change its status (or select it) really quickly
+
+        IDEA    i could use sh scripts to find, copy, paste into the collection
+                files but only for specific lines and have it auto refresh
+                with rsync or something
+
+
+    FEATURE     macro from inside a block that sets it to done (append ! to
+                keyword) and folds the block
+                see also task two above and the MACROS section 
+
+
+UNSORTED
+
+    
+    IDEA        have the outcome of tests automatically sent into a file that 
+                i can either manually link to its parent task and manually 
+                structure to fit my custom syntax, or try to have this 
+                automatically done since im purposefully move everything into 
+                text. meaning i dont have any interfaces to worry about for 
+                importing and exporting data. so its really just up to how well
+                i can reliably manage output given a simple enough syntax to 
+                mold the output to.
+                And really this opens up the door for so many more options. 
+                since its all just text i dont need special parsers to open 
+                and handle the files. 
+                point being i dont have to think anymore about what a task 
+                app can deliver or provide or offer me, instead i can think of
+                what i want and how i can achieve it.
+
+
+
+    IDEA        OR how about instead of having variables in a file that gets
+                repopulated when i open it, how about i create a new file 
+                whenever i run a command (maybe vim command? maybe sh?) that 
+                will look for all the tasks immediately underneath it (this 
+                involves a hierarchy which i am trying to avoid for txt) and 
+                display only the ones that have a certain flag (like ctask)
+                or something else ive defined
+                
+
+    FEATURE     some way to auto link notes from a task file without needing to
+                write out the whole filepath each time. maybe like a shortcut
+                command like gf that also appends the notes dir to the filename
+                it reads in?
+
+    
+    ISSUE       surfing through vim causes a annoying need to mentally keep
+                track of what buffers are open which antithesis to what this
+                is all about. need to find some way to handle this so that its
+                readily apparent what buffers i have and whats changed so I can
+                close them at all and not worry about losing content. 
+                especially when more than one terminal is open and ive now got
+                that swp file issue
+
+    THOUGHT     having a single file like tasks.done.txt show ALL tasks that
+                are done might not be as helpful as i think if ive got a 
+                million generic subtasks
+                but maybe having something like a tree generated instead 
+                that uses the parent child mapping added at the top of the file
+                to show what is a parent and child of certain tasks. 
+                so instead of having a file which shows the expanded version 
+                of all these tasks in a flat structure might be a bit hard to
+                navigate through, but having a foldable hierarchy of tasks 
+                would be easier to see what was done and what wasnt, and whats
+                next and what is currently in the works and whats blocking it
+
+    TODO        double escape is a save
+
+    FEATURE     when inside a block (either just hovering or selected with vip)
+                I should make a function (and preferably a macro too) that
+                finds the first filename in the current block, opens it, finds
+                the last usage of the STATUS keyword, copies everthing from
+                that line down, saves that, then pastes that over the top of
+                the current blocks last usage of the STATUS keyword (note, last
+                usage of STATUS could also be multiple lines, and could even be
+                more lines than what is being pasted over the top, both could
+                be bigger or smaller than the other)
+
+    IDEA        long urls are annoying, but what if I had a way to store every
+                url in a common txt file and reference it with a short uuid
+                like url::39, that way it wont mess up the formatting of my
+                docs. other idea for the urls would be to treat anything that
+                starts with a http:// or https:// as a softwrap so that I can
+                still copy it and paste it somewhere else without having a
+                newline break it apart if i was to try to bend it to fit my
+                formatting
+
+    FEATURE     for txt files, if im writing out a long block of text for some
+                keyword then vim should know to wrap the next to the block im
+                in either by looking for a keyword region match
+                OR if I can somehow set a page basis variable of columns which
+                lets me auto indent my current line to that that variable
+                column width or whatever. this would be less ideal because i
+                would still need to set it 
+
+    FEATURE     status bar at the top that shows how far down the chain i am
+                from the top TODO.txt file
+                (or maybe the top can be from wherever i first opened vim)
+                and if I 'gf' to another file that counts as a child? actually
+                thats not super helpful because i might surf gf and end up
+                going into a big circle. 
+                maybe i can use the existing parent child relationship at the
+                top of the task files to help build a ancestry chain that i can
+                toggle on or off
+

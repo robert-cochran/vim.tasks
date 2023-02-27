@@ -1,0 +1,5 @@
+task.230219.200336.txt
+- tasks.txt
+
+    TODO        make a new vim command for NewLog and NewTest to store the 
+                contents of tests/logs that are particularly long and heinous

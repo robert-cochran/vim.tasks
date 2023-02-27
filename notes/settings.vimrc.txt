@@ -1,0 +1,40 @@
+SETTINGS
+
+    enabling custom folding in vim
+
+    set foldmethod=syntax   " For the vim tasking I can either write my own syntax file
+                            " https://vim.fandom.com/wiki/Syntax_folding_of_Vim_scripts 
+                            " or use expr (or maybe marker?)
+                            " see :help 'foldexpr'
+                            " https://vim.fandom.com/wiki/Folding_with_Regular_Expression
+                            " expr for folding would be something like first TASK
+                            " before two newlines, and last STATUS before two
+                            " newlines. or even just all text inbetween two newlines
+                            " on either side. 
+                            " nice feature would be to fold it up but have the task
+                            " name visible, change the bg colour to match status
+                            " colour, and provide any status notes in the fold as
+                            " well
+                            " fold bg colour to match the status 
+                            " https://vim.fandom.com/wiki/Folding
+    CUSTOM INDENTATION POSTS   
+    NOTE:   Stackoverflow post on setting custom continuation of text after 
+            hitting the end of page. :help fo-table
+    LINK:   https://superuser.com/questions/271023/can-i-disable-continuation-of-comments-to-the-next-line-in-vim
+
+    LINK:   https://unix.stackexchange.com/questions/106526/stop-vim-from-messing-up-my-indentation-on-comments
+
+INDENTING
+
+    These are all (?) the vim variables that govern indenting, indent
+    vars seem like they would be useful for my todo tracking keeping
+    things in columns
+    https://stackoverflow.com/questions/235839/indent-multiple-lines-quickly-in-vi
+
+    set expandtab       "Use softtabstop spaces instead of tab characters for indentation
+    set shiftwidth=4    "Indent by 4 spaces when using >>, <<, == etc.
+    set softtabstop=4   "Indent by 4 spaces when pressing <TAB>
+    set autoindent      "Keep indentation from previous line
+    set smartindent     "Automatically inserts indentation in some cases
+    set cindent         "Like smartindent, but stricter and more customisable
+

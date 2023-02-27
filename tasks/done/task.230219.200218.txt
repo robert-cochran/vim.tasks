@@ -1,0 +1,6 @@
+task.230219.200218.txt
+- tasks.txt
+
+    TODO        when creating a new file with NewTask have the current file 
+                written at the top of the file, and then the new file name
+                underneath

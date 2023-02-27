@@ -1,0 +1,38 @@
+DOCS
+
+    FOLDING                 https://vim.fandom.com/wiki/Folding#Syntax_folding
+    FOLDING PLAIN TXT       https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
+    NOTE:                   Lots of good notes here for what I want!
+    AUTOINDENT              https://vim.fandom.com/wiki/Indenting_source_code#'autoindent'
+    INDENT TEXT OBJ         https://vim.fandom.com/wiki/Indent_text_object
+    TEXTOBJ-INDENT          https://www.vim.org/scripts/script.php?script_id=2484
+
+    MOVE BLOCKS VISUAL      https://vim.fandom.com/wiki/Shifting_blocks_visually
+
+    VIM REGEX               Vim documentation: pattern
+                            https://vimdoc.sourceforge.net/htmldoc/pattern.html
+    VIM REGEX               Perl vs Vim regex
+                            https://softpanorama.org/Editors/Vimorama/vim_regular_expressions.shtml
+    NOTE:                   Apparently vim predates perl regex
+    VIM REGEX               In Vim, how do you search for a word boundary character, like the \b in regexp?
+                            https://stackoverflow.com/questions/8404349/in-vim-how-do-you-search-for-a-word-boundary-character-like-the-b-in-regexp
+    VIM REGEX               Why does VIM have its own regex syntax?
+                            https://stackoverflow.com/questions/3604617/why-does-vim-have-its-own-regex-syntax/3604643#3604643
+    VIM REGEX               What's the difference between vim regex and normal regex?
+                            https://stackoverflow.com/questions/3864467/whats-the-difference-between-vim-regex-and-normal-regex
+    VIM REGEX               Can I make vim accept \b rather than just \< and \>?
+                            https://stackoverflow.com/questions/33081331/can-i-make-vim-accept-b-rather-than-just-and/33081758#33081758
+    VIM REGEX               Within vim's regex engine, why are some metacharacters escaped and some are not?
+                            https://stackoverflow.com/questions/13998913/within-vims-regex-engine-why-are-some-metacharacters-escaped-and-some-are-not#13999104
+
+HELP DOCS
+
+    :h docs
+    :help highlight-default
+    :help group-name
+    :h syn
+    :h syn-keyword
+    :h iskeyword
+    :h group-name
+    :help syn-multi-line:
+

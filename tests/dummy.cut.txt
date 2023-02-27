@@ -1,0 +1,9 @@
+    TASK:   Build project locally
+    RUN:    mvn clean install -Prelease-docker
+    NOTE:   this should create whois-db/target/Dockerfile and whois-db/target/entrypoint.sh but double check
+
+    OPTIONAL
+    NOTE:   if above doesn't work try this
+    TASK:   Build project through Docker (eugh)
+    RUN:    docker-compose run --rm -e BUILD_UID=$(id -u) -e BUILD_GID=$(id -g) \
+                whois-build -Prelease-docker clean install

@@ -1,0 +1,11 @@
+syntax
+
+    LINK        https://vim.fandom.com/wiki/Creating_your_own_syntax_files
+                good site, lots of examples
+    LINK        https://learnbyexample.github.io/vim_reference/Regular-Expressions.html
+                another good site with lots of examples
+    LINK        https://learnvimscriptthehardway.stevelosh.com/chapters/45.html
+                again see above
+    LINK        https://superuser.com/questions/844004/creating-a-simple-vim-syntax-highlighting
+                Guide to simple syntax highlighting
+

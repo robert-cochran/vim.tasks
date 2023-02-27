@@ -1,0 +1,62 @@
+PROJECT TODOS
+TODO
+
+!! single line imporant !!
+??
+multi line note
+??
+//
+another note
+\\
+
+    !! single line imporant !!
+    ??
+    multi line note
+    ??
+    //
+    another note
+    \\
+
+    PROJECT     proj1
+    REPO        github.com/proj/1
+    RUN:        proj1.sh
+    TASK        Recreate proj1 
+    NOTE        See proj1/README.md
+
+
+    PROJECT     proj2
+    REPO        proj/2
+    TASK        create proj2
+    NOTE        !! single line imporant !!
+    TODO        create mvp for proj2 
+    REPO        tracks-plugin
+    TASK        port the work from the personal tracks-nb-gh 
+                into a public shareable plugin
+    NOTE        ??
+                multi line note
+                ??
+    NOTE        //
+                another multi line note
+                \\    
+    REPO        tracks-svelte
+    TASK        learn about svelte
+    TODO        write tracks (barebones) in svelete
+
+    TASK        task1
+    STATUS      PENDING
+
+    TASK        task2
+    PARENT      proj2
+    STATUS      FAIL
+
+    SUBTASK     subtask1
+    PARENT      task2
+    GPARENT     proj2
+    TEST        will this fix it
+    RUN         ls -la
+    FIXED       n
+    TEST        will this work
+    RUN         rm sys32
+    FIXED       y
+    STATUS      SUCCESS
+    

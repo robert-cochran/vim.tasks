@@ -1,0 +1,12 @@
+COMMANDS
+
+    .           in normal mode, this will repeat last command
+    >           indents a selection by tab
+    <           deindents
+    zo          open fold
+    zc          close fold
+    zC          close all folds
+    zO          open all folds
+    ctrl+w T    opens buffer into new tab (helpful when opening help documents that splits the term)
+    ctrl+w o    closes window
+    ctrl+w c    closes window (yea i dunno either, one of them is probably wrong)

@@ -1,0 +1,4 @@
+task.230219.200222.txt
+- tasks.txt
+
+    TODO        have the cut tasks name and status copied into current file

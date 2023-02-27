@@ -1,0 +1,69 @@
+
+SYNTAX/SETTINGS
+    
+    TODO            light green foreground and italic
+    QUESTION        ?
+        ANSWER
+    DEBUG           light gold
+    WARNING
+        FIX
+    NOTE
+    RUN             light blue italic
+    TASK            bold underlined white
+    SUBTASK
+    SECTION
+    TEST
+    ERROR           red italic
+        IDEA
+    RECAP
+    STATUS: SUCCESS green background
+    STATUS: FAIL    red background
+    STATUS: PENDING purple background
+    TERMS
+    TROUBLESHOOTING
+    RESOURCES
+    EXPLORATION
+    README
+    FIXME?
+
+SYNTAX.USECASES
+
+    IDEA:           certain syntax seems to be helpful for certain tasks, and 
+                    designing syntax around those tasks might be the most smart
+                    (or most useful?) way to go about designing instead of
+                    trying to design syntax for every file
+                    Examples so far are: 
+                    
+                    TASKS for general purpose things that i need to do, and 
+                    what i have done, and any subtasks or parent tasks this 
+                    relates to, and outcome/status so far, blocked status and
+                    which file its being blocked by
+                    
+                    TESTS for keeping track of what the goal is when running 
+                    tests, what ive tried so far, and ideas about what i could 
+                    try in the future, and outcome so far. also really closely
+                    relates to DEBUGGING
+
+                    TICKETS? not sure about this one, might just be a task 
+                    with a fancy name
+
+                    DEBUGGING basically tests? not sure if its that much diff
+                    yet
+
+                    NOTES for keeping track of handy commands for later, 
+                    order of operations, useful tips and tricks, all kinds of 
+                    stuff like that, much more could go here but you know what
+                    it is
+
+SIMILAR.SYNTAX.EXAMPLES
+   
+    NAME            cornell note taking structure
+    NAME            cornell note taking app         
+                    https://apps.apple.com/us/app/columns-cornell-notes/id1493839821?mt=12
+    NAME            rfc format
+                    https://blog.apnic.net/2021/08/26/a-brief-history-of-the-rfc-format/
+    NAME            taskwarrior-tui
+                    has a very well established system in place for outlining
+                    specific states to colour
+                    https://kdheepak.com/taskwarrior-tui/configuration/colors/
+                    and useful properties related to tasks

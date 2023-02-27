@@ -1,0 +1,18 @@
+task.230219.195723.txt
+- tasks.txt
+
+    QUESTION    How should I do filenames. task.parent.child.txt, or 
+                task.uuid.txt. at least with the second you know what the last
+                thing you worked on was, and you cant tell that with the first
+                since you can go back up the tree and not know where you were
+                before. but the second way shows the relationship more easily
+                so that you can drill down through the filesystem
+                only issue is needing to manually manage all those file names
+                is one more thing to think about and the point of this is to
+                minimise thinking. 
+                the easiest way would be to timestamp every new task as
+                task.yymmddhhmmss.txt . but how are you supposed to find 
+                files you just stored a task into? sort by name i guess and
+                manually go through? is there a way to attach a name to the 
+                task in the parent txt file when its created?
+                also how do i automate creating a timestamped file?

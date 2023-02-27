@@ -1,0 +1,131 @@
+manual test autnum
+Setup
+
+    STRUCTURE:  Test setup's hierarchical structure
+                follows the autnum structure laid
+                out in RFC2725 under Appendix B: Examples
+                https://www.rfc-editor.org/rfc/rfc2725#page-23
+                Further info about maintainers here
+                https://www.rfc-editor.org/rfc/rfc2725#section-9
+                For our tests:
+                ROOT-MAINTAINER         = APNIC-HM
+                APNIC-HM auth:          SSO test_uid
+                referal-by              replaced with mnt-by
+                WIZARDS maintainer      alex@apnic.net
+                MORTALS maintainer      rob.cochran@apnic.net
+
+    TASK:   ADD person AR90-AU
+    RUN:    whois.rest.testenv/POST-create-person-AR90-AU-override.sh
+    VERIFY:
+    STATUS: SUCCESS
+
+    TASK:   ADD mntner WIZARDS
+    NOTE:   Used by authorized apnic technical staff
+    RUN:    whois.rest.testenv/POST-create-mntner-WIZARDS-override.sh
+    STATUS: SUCCESS
+
+    TASK:   ADD mntner MORTALS
+    NOTE:   Used by apnic users by maintained by wizards mntner
+    RUN:    whois.rest.testenv/POST-create-mntner-MORTALS-override.sh
+    STATUS: SUCCESS
+
+    TASK:   ADD as-block AS65500-AS65510
+    RUN:    POST-create-asblock-AS65500-AS65510-override.sh
+    NOTE:   This uses override to create a block with a wizards (alex) maintainer attached
+    NOTE:   Creation requires override since parent block AS0 - AS4294967295 has
+            mnt-lower: APNIC-HM.
+    STATUS: SUCCESS
+
+    TASK:   ADD irt IRT-TEST
+    RUN:    POST-create-irt-IRT-TEST-accesstoken.sh
+    NOTE:   contains auth only for mortal maintainer (rob)
+    VERIFY: irt added to mysql and queryable/requestable
+        RUN:    mysql.testenv/list-irts.sh
+        RUN:    whois.rest.testenv/GET-lookup-irt-IRT-TEST.sh
+        RUN:    whois.query.testenv/irt-IRT-TEST-unfiltered.sh
+    STATUS: SUCCESS
+
+
+Create AUTNUM
+
+    TASK:   ADD autnum AUTNUM_AS65501 without mnt-irt auth FAILS
+    TEST:   Authorized WIZARD mntner user (Alex) cant add an autnum
+            without being authorized by mnt-irt: IRT-TEST
+    RUN:    PUT-update-irt-IRT-TEST-accesstoken-remove-alex.sh
+    RUN:    POST-create-autnum-AS65501-accesstoken.sh
+    VERIFY: autnum not added to mysql and not queryable/requestable
+        RUN: mysql.testenv/list-autnum.sh
+        RUN: whois.rest.testenv/GET-lookup-autnum-AUTNUM.sh
+        RUN: whois.query.testenv/autnum-AS65501-unfiltered.sh
+    STATUS: SUCCESS
+
+    TASK:   ADD autnum AUTNUM_AS65501 without mnt-by auth FAILS
+    TEST:   Authorized IRT-TEST irt user (Rob) cant add an autnum
+            without being authorized by mntner: WIZARDS
+    RUN:    POST-create-autnum-AS65501-accesstoken-unauthorized.sh
+    VERIFY: autnum not added to mysql and not queryable/requestable
+        RUN: mysql.testenv/list-autnum.sh
+        RUN: whois.rest.testenv/GET-lookup-autnum-AUTNUM.sh
+        RUN: whois.query.testenv/autnum-AS65501-unfiltered.sh
+    STATUS: SUCCESS
+
+    TASK:   ADD autnum AUTNUM_AS65501 using mnt-lower:WIZARDS SSO + mnt-irt:IRT-TEST SSO
+    TEST:   Authorized Wizard mntner user (Alex) can add an autnum
+            using myapnic token and personal SSO details (email/uid)
+            when authorized by both mnt-irt and mnt-by
+    RUN:    PUT-update-irt-IRT-TEST-accesstoken-add-alex.sh
+    RUN:    POST-create-autnum-AS65501-accesstoken-alex.sh
+    NOTE:   No override needed since parent as-block has mnt-lower: WIZARDS
+    VERIFY: autnum added to mysql and queryable/requestable
+        RUN: mysql.testenv/list-autnum.sh
+        RUN: whois.rest.testenv/GET-lookup-autnum-AUTNUM.sh
+        RUN: whois.query.testenv/autnum-AS65501-unfiltered.sh
+    STATUS: SUCCESS
+
+
+Update AUTNUM
+
+    TASK:   Update AUTNUM using mnt-by: Wizards SSO
+    TEST:   Authorized Wizard mntner user (Alex) can update an autnum
+            using myapnic token and personal SSO details (email/uid)
+    RUN:    PUT-update-autnum-AS65501-accesstoken.sh
+    VERIFY: autnum updated in mysql and query/rest returning corret info
+        RUN:    mysql
+        RUN:    query
+        RUN:    rest
+    STATUS: SUCCESS
+
+    TASK:   Update AUTNUM using unauthorized SSO
+    TEST:   Unauthorized user (Rob) cant update an autnum
+            using myapnic token and personal SSO details (email/uid)
+    RUN:    PUT-update-autnum-AS65501-accesstoken-unauthorized.sh
+    VERIFY: no info changed in mysql or rest/query
+        RUN:    mysql
+        RUN:    query
+        RUN:    rest
+    STATUS: SUCCESS
+
+Delete AUTNUM
+
+    TASK:   DELETE AUTNUM using unauthorized SSO
+    TEST:   Unauthorized user (Rob) cant delete an autnum
+            using myapnic token and personal SSO details (email/uid)
+    RUN:    POST-delete-autnum-AS65501-accesstoken-unauthorized.sh
+    VERIFY: autnum still exists in mysql and query/rest still return it
+        RUN:    mysql
+        RUN:    query
+        RUN:    rest
+    STATUS: SUCCESS
+
+    TASK:   Delete AUTNUM using mnt-by: Wizards SSO
+    TEST:   Authorized Wizard mntner user (Alex) can delete an authorized autnum
+            using myapnic token and personal SSO details (email/uid)
+    RUN:    POST-delete-autnum-AS65501-accesstoken.sh
+    VERIFY: autnum gone from mysql and query/rest dont return it
+        RUN: GET-lookup-autnum-AUTNUM.sh
+        RUN: mysql.*/list-autnum.sh
+        RUN:    query
+    STATUS: SUCCESS
+
+
+STATUS: SUCCESS

@@ -1,0 +1,19 @@
+task.230219.200059.txt
+- tasks.txt
+
+    QUESTION    is it better (short or long term) to have all tasks for a
+                single ticket or project in a single file that can be folded
+                up whenever but require either manual fold setting or complex
+                folding syntax, OR to have each task in its own file to reduce
+                clutter in a single file but then introduce the complexity of 
+                linking files together to ease navigation and skeleton 
+                templates that need to be auto refreshed to see any content
+                thats been updated
+                on one hand, tasks with their own files will be able to have
+                more custom, flexible, adhoc structure since it wont be relying
+                on custom folding syntax, but on the other it makes finding 
+                content easier since everything is in this one file (but really
+                using bash commands this should be easy to find strings 
+                amongst a dir of files too).
+                single file also makes indenting not really an option and will
+                require me to be much more diligent with following the syntax

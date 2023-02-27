@@ -1,0 +1,7 @@
+task.230219.194733.txt
+- tasks.txt
+
+    FEATURE:    creating a TASK field automatically inserts an accompanying
+                STATUS field with value PENDING 
+                (would this become annoying? do we ever have 
+                tasks without needing a status? dont think so)

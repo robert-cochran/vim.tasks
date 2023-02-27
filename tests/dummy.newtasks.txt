@@ -1,0 +1,71 @@
+dummy.newtasks.txt
+
+    IDEA:       Folding is useful for certain filetypes that contain lots of tasks
+                in a single txt file, for instance tests. Any long txt file is a 
+                good candidate here (especially since I have a very structured way
+                of writing out tasks/notes now).
+    DRAWBACK:   In the long run its better to have a collection of files that
+                can reference each other, since you'll want to reference 
+                certain files from other files to make finding content easier
+                (e.g. tasks parents to children, hashtags, help docs, etc.)
+
+    FOLDING:    I got this method below to work with folding up blocks of txt 
+                starting with TASK: and ending with \n\n, but there are some
+                strange bugs (e.g. a task inside of a task will fold the second
+                task first and leave the top one to cover all other tasks 
+                (since its looking for a corresponding \n\n and all the other
+                tasks have taken them, so the first one just subsumes them all)
+    SYNTAX:     in the .vim/syntax/txt.vim add these lines
+    CODE        syn region taskFold start=/TASK:.*/ end="\n\n" transparent fold
+                syn sync fromstart
+    ACTIVATE    either do this in a file to see or add it to your vimrc to make
+                it permanent
+    COMMAND     set foldmethod=syntax
+    LINK        using sytax folding
+                https://vi.stackexchange.com/questions/19542/is-it-possible-to-use-newlines-in-a-fold-marker
+
+    RESOURCES
+    LINK        using marker folding
+                https://stackoverflow.com/questions/3758739/how-to-fold-all-occurrences-of-a-regex-in-vim
+    LINK        folding examples
+                https://learnvim.irian.to/basics/fold
+    LINK        advanced folding
+                https://learnvimscriptthehardway.stevelosh.com/chapters/49.html
+    LINK        second answer provides cool use of folding
+                https://vi.stackexchange.com/questions/3814/is-there-a-best-practice-to-fold-a-vimrc-file
+    LINK        fold expr tips
+                https://vi.stackexchange.com/questions/2176/how-to-write-a-fold-expr
+    LINK        more fold expr tips
+                https://vim.fandom.com/wiki/Folding_with_Regular_Expression
+
+    TASK:       NEW TASK
+    NOTE:       eat shit
+    STATUS:     LOL
+
+2023-02-10 00:27:30
+20230210 00:27:46
+Fri 10 Feb 2023 00:25:09 AEST
+
+
+:r! date "+\%Y.\%m.\%d.\%H.\%M.\%S"
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+
+:r! date "+\%Y.\%m.\%d.\%H.\%M.\%S"
+:r! date "+\%Y.\%m.\%d.\%H.\%M.\%S"
+:r! date "+\%Y.\%m.\%d.\%H.\%M.\%S"
+:r! date "+\%Y.\%m.\%d.\%H.\%M.\%S"
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02
+2023.02.10.00.29.18
+2023.02.10.00.30.02

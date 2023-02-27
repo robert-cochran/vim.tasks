@@ -1,0 +1,66 @@
+Setup
+
+    TEST: Create AR90-AU Person
+    RUN: POST-create-person-AR90-AU-override.sh
+    NOTE: This will be used as the MAINT-SSO1 admin-c value in the next step
+    STATUS:
+
+    TEST: Verify AR90-AU was created
+    RUN: GET-lookup-person-AR90-AU.sh
+    RUN: mysql.*/list-person.sh
+    NOTE: run verification on both whois and mysql to ensure they're in sync with each other
+    STATUS: SUCCESS
+
+    TEST: Create MAINT-SSO1 Mntner
+    NOTE: Creates mntner with personal sso in auth
+    NOTE: Existing OWNER-MNT and APNIC-HM didn't work, new mntner created instead
+    RUN: POST-create-mntner-MAINT-SSO1-override.sh
+    STATUS: SUCCESS
+
+    TEST: Verify MAINT-SSO1 was created and contains personal sso
+    RUN: GET-lookup-mntner-MAINT-SSO1.sh
+    RUN: mysql.*/list-mntner-MAINT-SSO1-object-decoded-plaintext.sh
+            then hex decode the object to verify personal auth was saved as the uid
+    STATUS: SUCCESS
+
+Create MAINT-SSO2
+
+    TEST: Create MAINT-SSO2 using SSO
+    NOTE: Test to create a person with only personal sso as auth (and myapnic token)
+    RUN: POST-create-mntner-MAINT-SSO2-accesstoken-myapnic.sh
+    STATUS: SUCCESS
+
+    TEST: Verify MAINT-SSO2 was created and contains personal sso
+    RUN: GET-lookup-mntner-MAINT-SSO2.sh
+    RUN: mysql.*/list-mntner-MAINT-SSO2-object-decoded-plaintext.sh
+            then hex decode the object to verify personal auth was saved as the uid
+    STATUS: SUCCESS
+
+Update MAINT-SSO2
+
+    TEST: Update MAINT-SSO2
+    NOTE: Adds new sso auth for another user and updates desc
+    RUN: PUT-update-mntner-MAINT-SSO2-accesstoken-myapnic.sh
+    STATUS:
+
+    TEST: VERIFY Changes
+    RUN: mntner-MAINT-SSO2-unfiltered.sh [not working]
+    RUN: list-mntner-MAINT-SSO2-object-hex.sh then decode manually (try using xxd)
+    STATUS:
+
+
+Delete MAINT-SS02
+
+    TEST: Delete MAINT-SSO2 using personal sso auth
+    RUN: POST-delete-MAINT-SSO2-accesstoken-myapnic.sh
+    STATUS: SUCCESS
+
+    TEST: VERIFY Deletion
+    RUN: list-mntners.sh
+    RUN: GET-lookup-mntner-MAINT-SSO2.sh
+    STATUS: SUCCESS
+
+
+STATUS: UNFINISHED, UPDATE not done
+
+

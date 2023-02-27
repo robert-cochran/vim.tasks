@@ -1,0 +1,5 @@
+task.230219.145955.txt
+- tasks.txt
+
+    FEATURE:    quickly/auto send a current task into its own file or window 
+                when they get too big

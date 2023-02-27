@@ -1,0 +1,5 @@
+task.230219.175226.txt
+- tasks.txt
+
+    FEATURE:    creating a TEST field automatically inserts an accompanying
+                OUTCOME field with value PENDING

@@ -1,0 +1,10 @@
+task.230220.214429.txt
+- tasks.txt
+
+    FEATURE     add a new syntax for Q!: when a question has been answered.
+                could do similar thing for a test when its done. or a task 
+                or subtask even?
+                or could do Q-: if having ! could cause problems, not sure
+                could even have that as a general rule for any keyword ending 
+                in a ! (or whatever special character i define) will result in
+                darker text to denote its not needed anymore

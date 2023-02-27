@@ -1,0 +1,8 @@
+task.230219.201024.txt
+- tasks.txt
+
+    VIM-FEAT    also have some way to populate filenames so that I dont have to
+                run around adding the new filename to a million places (e.g.
+                inside the ctask here, at the header of the task itself, ..?)
+                might be done with templates? but that would only work for the
+                one time

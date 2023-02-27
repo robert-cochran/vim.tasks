@@ -1,0 +1,8 @@
+    
+    IDEA        take a visual block of code and send it into its own file
+                while deleting it from the current file
+    VIMRC       :command! -bang -range -nargs=1 -complete=file MoveWrite  <line1>,<line2>write<bang> <args> | <line1>,<line2>delete _
+                :command! -bang -range -nargs=1 -complete=file MoveAppend <line1>,<line2>write<bang> >> <args> | <line1>,<line2>delete _
+    LINK        solution came from this stack post
+                https://superuser.com/questions/540472/move-selection-to-a-separate-file
+

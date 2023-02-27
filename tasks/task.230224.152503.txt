@@ -1,0 +1,8 @@
+task.230224.152503.txt
+- tasks.txt
+
+    MAJOR ISSUE using the vim NewTask command will make the file in whatever 
+                directory was used to open vim (e.g. if started in 
+                intellijScratchpad then the tasks will be there instead of
+                whatever the directory is of the FILE you are creating the
+                NewTask in)

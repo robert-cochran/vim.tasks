@@ -1,0 +1,13 @@
+task.230219.200827.txt
+- tasks.txt
+
+    VIM-FEAT    have the task name (i.e. task.x.x.x.x....) auto generated when
+                a command is issued from either inside the parent file
+                or when hovering over the parent task in this file (or easier
+                when hovering over the parents filename)
+                links on custom gf techniques to create files
+    LINK        https://neovim.discourse.group/t/help-me-to-create-an-intricate-mapping/2858
+    LINK        https://stackoverflow.com/questions/33093491/vim-gf-with-file-extension-based-on-current-filetype
+    LINK        https://www.reddit.com/r/vim/comments/i2x8xc/i_want_gf_to_create_files_if_they_dont_exist/
+    NOTE        Also check out the various wiki/vim plugins, im sure theyd
+                have plenty of interesting ideas

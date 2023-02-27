@@ -1,0 +1,198 @@
+Deploying a new Image:
+------------------------------------------------------------------------------------------------------------------------
+Option 1 - Locally deploy new image
+
+    TASK:   Build project locally
+    RUN:    mvn clean install -Prelease-docker
+    NOTE:   this should create whois-db/target/Dockerfile and whois-db/target/entrypoint.sh but double check
+    OPTIONAL
+    NOTE:   if above doesn't work try this
+    TASK:   Build project through Docker (eugh)
+    RUN:    docker-compose run --rm -e BUILD_UID=$(id -u) -e BUILD_GID=$(id -g) \
+                whois-build -Prelease-docker clean install
+
+    TASK:   Build image
+    RUN:    docker build -t acr2.tst.apnic.net/sw/registry/whois/whois/review/rst-1203:debug \
+                --build-arg JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n \
+                -f whois-db/target/Dockerfile whois-db/target
+
+    TASK:   Login to acr2 docker repo/hub/whatever to push image
+    RUN:    docker login acr2.tst.apnic.net
+    NOTE:   username:rob.cochran
+    NOTE:   password:okta password
+
+    TASK:   Push image
+    RUN:    docker push acr2.tst.apnic.net/sw/registry/whois/whois/review/rst-1203:debug
+    NOTE:   from alex. regarding the name - it doesn't matter so long as it matches the image here:
+            https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/blob/RST-1503/whois/helm/test-env-values.yaml
+    NOTE:   pushed image can be found here
+            https://acr2.tst.apnic.net/harbor/tags/54/sw%2Fregistry%2Fwhois%2Fwhois%2Freview%2Frst-1203
+
+    TASK:       clone alloc-test-data repo
+    RUN:        git clone git@gitlab.xyz.apnic.net:sw/api/alloc-test-data.git && cd alloc-test-data && git checkout RST-1503
+
+    TASK:       delete chart/release
+    RUN:        helm -n registry-team uninstall whois-alt1
+    DEBUG:       see running charts with
+        RUN:    helm -n registry-team list
+
+    TASK:       deploy chart/release (w/ kubectl/helm)
+    RUN:        helm upgrade \
+                    --install \
+                    --wait \
+                    --namespace=registry-team  \
+                    --values=whois/helm/test-env-values.yaml whois-alt1 whois/helm/whois/
+    WARNING:    run the above command from the alloc-test-data repo, not from outside the whois project.
+                the whois helm files wont work for this
+    DEBUG:      add --debug flag for more verbose output
+    README:     https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/tree/RST-1503/whois
+    DEBUG:      get registry-team events to help diagnose errors
+        RUN:    kubectl -n registry-team get events --sort-by='{.lastTimestamp}'
+    DEBUG:      get all registry-team kube things (use this to get hash for below debugs)
+        RUN:    kubecrl -n registry-team get all
+    DEBUG:      view the logs of the container (or whatever this is called)(get hash from above command)
+        RUN:    kubectl -n registry-team describe <service-pod-container-whatever-hash>
+    DEBUG:      view the java log of the container (or whatever this is called)
+        RUN:    kubectl -n registry-team log <service-pod-container-whatever-hash> db
+    DEBUG:      lifetime follow the java log of the container (or whatever this is called)
+        RUN:    kubectl -n registry-team log --follow <service-pod-container-whatever-hash> db
+    WARNING:    StorageClassName basic-retain standard-retain can not be less than previous value
+        FIX:    in values.yml change basic-retain to standard-retain
+    WARNING:    Error: InvalidImageName
+                Failed to apply default image tag ":latest": couldn't parse
+                image reference ":latest": invalid reference format
+        FIX:    The whois/helm/test-env-values.yaml file is configured for a different environment than whois-alt1
+                need to go to https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/blob/RST-1503/whois/helm/test-env-values.yaml
+                and use that yaml file instead
+    NOTE:       PULL POLICY in test-env-values.yaml
+                pullPolicy means that it won't try to pull an image on deployment,
+                if this image already exists locally. So, for test/debug purposes
+                it's probably better to use Always to be sure that it pulls an
+                image every deployment, otherwise you may run into problem with stale image .
+
+
+
+
+    TASK:       Check image is running
+    RUN:        helm -n registry-team list
+    RUN:        kubectl -n registry-team logs pod/whois-alt1-74d9bd9bb4-shzs7 whois
+    RUN:        mysql -hwhois-alt1.svc.tst.apnic.int -uroot -ppassword -P3307 apnicdb -e "select * from irt"
+    RUN:        whois -p44 -hwhois-alt1.svc.tst.apnic.int OWNER-MNT
+    TEST:       check query returns the correct whois version (1.88.17)
+    DEBUG:      get registry-team events to help diagnose errors
+        RUN:        kubectl -n registry-team get events --sort-by='{.lastTimestamp}'
+    DEBUG:      view the logs of the container (or whatever this is called)
+        RUN:        kubectl -n registry-team describe <whois-container-hash>
+    DEBUG:      view the java log of the container (or whatever this is called)
+        RUN:        kubectl -n registry-team log <whois-container-hash> db
+    DEBUG:      lifetime follow the java log of the container (or whatever this is called)
+        RUN:        kubectl -n registry-team log --follow <whois-container-hash> db
+    WARNING:    version returned from -p44 query is 1.88.16 (WHOIS-ALT1-78C8CB7759-RVNLR)
+        FIX:        build new image
+
+
+
+    TASK:       Import Database Snapshot into Whois database
+    RUN:        cat whois/apnicdb.sql | mysql -hwhois-alt1.svc.tst.apnic.int -uroot -ppassword -P3307 apnicdb
+    README:     https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/tree/RST-1503/whois#import-database-snapshot-into-whois-database
+
+    EXPLORATION
+    Q:  so the whois-alt1 is a release? What is a release?
+    Q:  In Helm what is a chart, cluster, node, pod, release, image, repo, and how do they relate
+        BREAKDOWN: https://www.redhat.com/en/topics/containers/what-is-kubernetes-pod
+    Q:  a chart gets released? can one chart have >1 release?
+    Q:  is a release always brought by a chart
+    Q:  release vs image?
+    Q:  how is release managed/used by kube
+
+
+    TERMS
+    whois-alt1:         release, assuming its chart is whois/helm/whois/Chart.yaml
+    acr2.tst.apnic.net  docker registry (hub?)
+    registry-team:      namespace,
+                        kubectl -n registry-team get all | grep whois-alt1
+    uninstall:          uninstalls a release from the (whatever terminology is right here, whatever a registry-team is)
+                        (same as delete afaik)
+    delete:             same as uninstall afaik
+    pod:                collection of containers (smallest unit of a kube app)
+                        generally will be a single container
+                        i think whois lives as a container image inside this pod
+                        pod/whois-alt1-78c8cb7759-rvnlr (or whatever new hash its been given now)
+    node:               "In essence, individual hardware is represented in Kubernetes as a node"
+                        kubectl get nodes
+    cluster:            "Multiple of those nodes are collected into clusters,
+                        allowing compute power to be distributed as needed"
+    container:          seems to be the same as an image
+                        https://kubernetes.io/docs/concepts/containers/
+    image:              docker image?
+                        https://kubernetes.io/docs/concepts/containers/images/
+    hub:
+    release:            an image attached to a chart?
+    chart:              used to create a release
+                        Multiple releases of the same chart can be active
+                        consist of multiple files, more like a directory
+    test-env-values
+
+
+    RESOURCES
+    helm cheat sheet concepts:      https://codefresh.io/docs/docs/new-helm/helm-best-practices/
+    official docs:                  https://helm.sh/docs/intro/
+
+    TROUBLESHOOTING
+    RUN:    kubectl get all
+    RUN:    kubectl -n registry-team get all | grep whois-alt1
+    RUN:    kubectl get pods
+    RUN:    helm -n registry-team list
+    RUN:    nmap -sT whois-alt1.svc.tst.apnic.int -p 43,44,4343,44001,43001,3306,3307
+    RUN:    whois -p44 -hwhois-alt1.svc.tst.apnic.int OWNER-MNT
+
+
+    CONFIG
+    NOTE:   whois.properties
+            https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/blob/RST-1503/whois/helm/whois/resources/config/whois.properties
+
+------------------------------------------------------------------------------------------------------------------------
+Option 2 - CI pipeline trigger Image Deployment
+
+    TASK:   Create a branch (no changes needed) from the repo:branch you want to create an image for
+
+    TASK:   Create a merge request in gitlab from source back into the target
+
+    TASK:   This triggers a pipeline that will create a docker image
+    NOTE:   https://gitlab.xyz.apnic.net/sw/registry/whois/whois/-/pipelines
+    NOTE:   Can also look at the merge request pipeline
+
+    TASK:   In the pipeline, under publish stage, find and click the docker_image button
+
+    TASK:   Look through output for the job id (tag number) and Save the docker image tag number
+    NOTE:   e.g. Successfully tagged acr2.tst.apnic.net/sw/registry/whois/whois/review/rst-1203-preliminary-mr:107581
+    NOTE:   107581 is the tag number or job id in this case
+    ERROR:  I got an error in the pipeline here https://gitlab.xyz.apnic.net/sw/registry/whois/whois/-/jobs/897284.
+        MESSAGE:    $ ensure_chart_version_is_new
+                    An existing chart with the version 1.2.3 exists, please update your chart version.
+                    Cleaning up file based variables 00:00
+                    ERROR: Job failed: command terminated with exit code 1
+        FIX:        update whois/helm/whois/Chart.yaml with 1.2.4.
+                    not confirmed but alex suggested it could be that helm requires updating chart version
+                    if you increase application version only
+
+    TASK:   Read the alloc-test-data:RST-1503 readme in whois folder for instructions on how to set up deployment
+    NOTE:   https://gitlab.xyz.apnic.net/sw/api/alloc-test-data
+    NOTE:   dont forget to set branch to RST-1503
+
+
+    OPTIONAL
+    TASK:   update test-env-values.yml with a new image tag and re-deploy the helm chart to redeploy a new image update
+    NOTE:   https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/blob/RST-1503/whois/helm/test-env-values.yaml
+    NOTE:   we need to edit this file because this will be used by helm
+    EX:     https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/merge_requests/5/diffs
+
+    TASK:   use kubectl to run helm command to redeploy new image (or pod? container?)
+    NOTE:   this was a passing comment from alex, im assuming you use the helm commands below to deploy
+    NOTE:   see kubectl.txt doc on checking running pods and such
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+

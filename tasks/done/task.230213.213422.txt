@@ -1,0 +1,3 @@
+    DONE        when using the NewTask command have the NewTask's filename
+                saved to a register or something, or even have it pasted into 
+                the current file

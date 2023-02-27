@@ -1,0 +1,4 @@
+task.230219.171717.txt
+- tasks.txt
+
+    FEATURE:    Having tests auto crossed out or hidden if they fail/were done

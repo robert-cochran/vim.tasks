@@ -1,0 +1,90 @@
+# Test Notes
+------------------------------------------------------------------------------------------------------------------------
+## TestEnv Configs
+    whois.configs                   https://gitlab.xyz.apnic.net/sw/api/alloc-test-data/-/blob/RST-1503/whois/helm/whois/resources/config/whois.properties
+    whois.url:                      whois-alt1.svc.tst.apnic.int
+    whois.api.port                  44001
+        NOTE:                       43001 points to whois-alt, not whois-alt1
+    whois.query.port                44
+        EXAMPLE:                    whois -hwhois-alt1.svc.tst.apnic.int:44 TP1-AP
+    whois.db.port                   3307
+        NOTE:                       two mysql db's running on , one at 3306 and one at 3307, ask which one to use if unsure
+                                        I think http://whois-alt.svc.tst.apnic.int uses 3306 and
+                                        http://whois-alt1.svc.tst.apnic.int uses 3307
+        EXAMPLE:                    mysql -hwhois-alt1.svc.tst.apnic.int:3307 -uroot -ppassword apnicdb
+    membership.service.url          db.tst.apnic.net
+        NOTE:                       membership.service = user.service
+    membership.service.db           alloc
+    membership.service.db.table     mem_contacts
+        NOTE:                       SSO WONT WORK WITHOUT THIS
+                                        add your (or dummy) user email/id here to use SSO with whois (e.g. run SSO curl commands)
+        EXAMPLE:                    mysql -hdb.tst.apnic.net -usoftware -ptest1234 alloc -e "select * from mem_contacts order by ctc_id desc limit 50"
+        EXAMPLE:                    mysql -hdb.tst.apnic.net -usoftware -ptest1234 alloc -e "
+                                        insert into mem_contacts (mem_id, ctc_name, ctc_designation, ctc_email, ctc_billing, ctc_technical,
+                                        ctc_hostmaster, ctc_training, ctc_corporate, ctc_source, uid)
+                                        values (730, 'rob', 'software', 'rob.cochran@apnic.net', 1,1,1,1,0, 'H', '00u4uds0kg0tGOjDA0x7')"
+
+## Auth Server and OAuth Info Config
+    user.service.api.url=                                   https://membership-internal-api.gke-sydney-test.nonprod.xyz.apnic.net/v1/users
+    user.service.api.key=                                   0d834458-00bf-11ed-97e9-42010a3c0117
+    authorization.server.id=                                aus4l3o9m6Dt5vhI50x7
+    authorization.server.url=                               https://beta-login.svc.tst.apnic.int/oauth2/aus4l3o9m6Dt5vhI50x7 Note: We have a Custom Auth Server, not a Okta Org Auth Server
+    authorization.server.scope=                             myapnic_whois
+    authorization.server.audience=                          api://myapnic-whois
+    myapnic client id =                                     0oa4l3oiivvXW7uM70x7
+    myapnic client secret =                                 u3ILgl-orzsS8uTOUE14585U-RqO7jciTafvxqDo
+    authorization.server.credentials.client:                0oa4l3oiivvXW7uM70x7:u3ILgl-orzsS8uTOUE14585U-RqO7jciTafvxqDo
+    authorization.server.credentials.client.encoded:        MG9hNGwzb2lpdnZYVzd1TTcweDc6dTNJTGdsLW9yenNTOHVUT1VFMTQ1ODVVLVJxTzdqY2lUYWZ2eHFEbw==
+    .well-known oauth config for test environment:          https://beta-login.svc.tst.apnic.int/oauth2/aus4l3o9m6Dt5vhI50x7/.well-known/oauth-authorization-server
+    .well-known openid config for test env here:            https://beta-login.svc.tst.apnic.int/oauth2/aus4l3o9m6Dt5vhI50x7/.well-known/openid-configuration
+    Other endpoint:                                         /v1/token, /v1/authorization, /v1/claims,
+------------------------------------------------------------------------------------------------------------------------
+# Issuing local dummy Curl commands to Docker with debugger for testing
+    Use this instead of the one below, not hardcoded that way
+    docker build -t whois/whois-db:latest --build-arg JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n -f whois-db/target/Dockerfile whois-db/target
+
+    Alex added this line to the whois-db/docker/Dockerfile:
+    ```Dockerfile
+    ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+    ```
+    Which lets us add a run/debug configuration under Remote JVM Debug.
+    Config needs to be changed from the default ~5000 to the 8000 from the dockerfile command line
+------------------------------------------------------------------------------------------------------------------------
+# Preliminary Test Setup Commands
+## SQL test commands
+Test the db is running and you can connect
+    mysql -hwhois-alt1.svc.tst.apnic.int -uroot -ppassword -P3307 apnicdb
+        SHOULD: connect to mariadb
+Test the db is returning data
+    mysql -hwhois-alt1.svc.tst.apnic.int -uroot -ppassword -P3307 apnicdb -e "select * from irt"
+        SHOULD: Return list of irt's from database
+
+##Rest test command example
+whois -hwhois-alt1.svc.tst.apnic.int -p44 TP1-AP
+    SHOULD: return data on TP1-AP
+    version returned should be 1.88.17
+    ERROR - incorrect version returned
+        if the test Whois Alloc Database is given a bad query then Whois returns a previous version
+            (i.e. instead of sending 'Whois Service version 1.88.16' it send 'Whois Service version 1.88.15-SNAPSHOT')
+            example: whois -hwhois-alt1.svc.tst.apnic.int p44 TP1-AP
+------------------------------------------------------------------------------------------------------------------------
+# QRD - TestingEnv (http://whois-alt1.svc.tst.apnic.int:44001) Basic REST test structure
+    NOTE: See tools/curl-commands/whois.rest.testenv for files
+    Add your user_email and user_id to db.tst.apnic.net (see membership.service.db.table above)
+    Check maintainer MAINT-NIR1 hasn't been added yet
+        Run mysql.testenv/list-mntner.sh
+        Run whois.rest.testenv/GET-lookup-mntner-MAINT-NIR1.sh
+    Add mntner MAINT-NIR1
+        Run whois.rest.testenv/POST-create-mntner-MAINT-NIR1.sh
+    Check it worked
+        Run mysql.testenv/list-mntner.sh
+        Run whois.rest.testenv/GET-lookup-mntner-MAINT-NIR1.sh
+    Check person TP1-AP hasn't been added
+        Run whois.rest.testenv/GET-lookup-person-TP1-AP.sh
+    Add person TP1-AP
+        Run whois.rest.testenv/POST-create-person-TP1-AP.sh
+    Check it worked
+        ...
+        NOTE: Check the db in the right place,
+                running a whois lookup might produce different results to doing a db select
+                e.g. using 3306 vs 3307

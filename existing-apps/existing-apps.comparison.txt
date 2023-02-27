@@ -1,0 +1,167 @@
+task.app.comparison.txt
+
+APPS.DESKTOP
+    
+    NAME            argdown
+                    https:/ /news.ycombinator.com/item?id=34428680
+    NAME            obsidian   
+    NAME            sublime
+    NAME            notepad++
+    NAME            intellij
+
+APPS.BROWSER
+    
+    HTML/JS         Extensible Code Editor          https://codemirror.net/
+    JS              Highlight.js                    https://highlightjs.org/
+
+APPS.TERMINAL
+    
+    NAME            taskwarrior
+        LINK        https://github.com/GothenburgBitFactory/taskwarrior
+        NOTE        its just a terminal app, doesnt suit what my needs
+                    are to use vim because of its flexibility, navigation,
+                    plugins, syntax, txt based etc..
+
+APPS.EMACS
+
+    NAME (*)        doom emacs
+    NOTE            reviews for it are very positive
+                    i found command learning annoying, 
+                    but maybe just need to power through
+    LINK            https://lucidmanager.org/productivity/getting-started-with-emacs/
+    LINK            https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#doom-emacs
+    LINK            https:/ /youtube.com/watch?v=37H7bD-G7nE  15m24s
+    LINK            https:/ /www.youtube.com/watch?v=iab2z21cRqA
+    NAME            emacs
+    NAME            org-mode
+    NAME            org-roam
+                    pros: folding, backlinks
+    NAME            org super agenda
+    
+APPS.VIM.TASKWARRIOR
+
+    NAME (***)      taskwarrior-tui
+                    https://github.com/kdheepak/taskwarrior-tui
+        PRO         Awesome interface, very clean, minimal, fast, 
+        CON         another app to be beholdent too
+        NOTE        use this as an example or influence, having everything
+                    as text is really the best long term answer so doing this
+                    right means not having to worry about this again forever
+                    (as long as I keep it simple that is)
+    NAME            vim-taskwarrior
+                    https://github.com/blindFS/vim-taskwarrior
+    NAME            taskwarrior.vim
+                    https://github.com/xarthurx/taskwarrior.vim
+
+APPS.VIM.ORG
+
+    NAME (*)        vim orgmode
+        PROS        syntax highlighting, hyperlinks
+        CONS        abandoned 
+    NAME            Vim-Orgmode
+                    not sure if different from above
+                    this is a plugin
+                    not maintained
+    NAME            VimOrganizer
+                    also a plugin
+                    also not maintained
+                    think both bailed to use emacs orgmode
+
+APPS.VIM.WIKI
+
+    NAME            taskwiki
+                    https://github.com/tools-life/taskwiki
+                    i like the feature where tasks are collapsed but
+                    can be expanded into a full view to show more detail
+                    but i dont think i like it enough to use
+    NAME (*)        vimwiki
+                    http://vimwiki.github.io/
+                    https://github.com/vimwiki/vimwiki
+                    Looks good, like the feature to nest todo and store more 
+                    details inside. might also be overkill, see wiki.vim
+                    for a lighter version
+        PRO         Still maintained and very popular
+    NAME (*)        wiki.vim
+                    simple plugin that creates links back and forth between
+                    files, lets you open anywhere, I could use to extend to my 
+                    needs
+
+APPS.VIM.UNSORTED
+
+    NAME            Vim-Waikiki
+    NAME            neuron.vim
+    NAME            neuron.nvim
+    NAME            Notoire
+    NAME (*)        vim-dotoo
+                    https://github.com/dhruvasagar/vim-dotoo
+    NAME            Vim Outlaw
+    NAME            calendar.vim
+    NAME            unfog.vim
+    NAME            vim-markdown
+    NAME            vim-pencil
+    NAME            vim-table-mode
+    NAME            WeeWiki
+    NAME            vim-tasks
+                    https://github.com/CrispyDrone/vim-tasks
+                    another simple kind of plugin 
+    NAME            vim columns
+    NAME            vim syntax highlighting
+                    https://superuser.com/questions/844004/creating-a-simple-vim-syntax-highlighting
+    NAME            asynctasks.vim
+                    Build and run tasks (seems more about prod but still 
+                    could be useful for using it to build data files)
+                    https://github.com/skywind3000/asynctasks.vim
+PROS+CONS.VIM
+
+    PRO             more stable
+    PRO             not going anywhere              
+    PRO             customizable                    
+    PRO             would be good to build          
+                        exactly what i want         
+                        while using existing        
+                        examples for guidance
+    CON             no gui or mouse control
+    CON             steeper learning curve
+    CON             will take a lot longer to do
+    CON             is only maintained by me
+    CON             all the popular plugins/repos for vim seem to be abandoned
+                    instead moving over to emacs org-mode using evil (my guess
+                    being larger dev community contribution)
+
+PROS+CONS.DESKTOP
+
+    PRO             out of the box                  
+    CON             more potential for change over time
+    PRO             mouse support                   
+    CON             more chance it will dissapear in teh future
+    PRO             smaller learning curve          
+    CON             more baggage just to implement simple syntax colouring in 
+                    plaintext
+
+
+PROS+CONS.HTML/JS
+
+    PRO             more stable than app            
+    CON             will probably need to write a lot of this myseld
+    PRO             portable to any browser         
+    CON             will need to run in browser
+    CON             will need to write a text editor
+    CON             could get messy
+
+PROS+CONS.DOOM
+    
+    PRO             vim support
+    CON             learning curve
+    PRO             lots of intergrated tools
+    CON             might be more stuff i dont need, adding to baggage
+
+VIM.VS.EMACS
+
+    QUESTION        what does emacs org-mode offer that makes it more
+                        attractive than just using vim? 
+                    why does everyone jump over?
+    QUESTION        does nvim offer anything better than vim?
+    QUESTION        does nvim offer anything that rivals or beats org-mode?
+
+
+

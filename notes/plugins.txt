@@ -1,0 +1,33 @@
+PLUGINS
+
+    vim-plug
+        https://github.com/junegunn/vim-plug
+    denite (async unite all interfaces)
+        https://github.com/Shougo/denite.nvim
+        previously 
+            https://github.com/Shougo/unite.vim
+    finder (fuzzy, tag, file, buffer, ...)
+        https://github.com/ctrlpvim/ctrlp.vim
+    fuzzy finder
+        https://github.com/junegunn/fzf
+    wiki.vim
+        https://github.com/lervag/wiki.vim
+    vimwiki
+        https://github.com/vimwiki/vimwiki#screenshots
+        test wikis
+            https://github.com/vimwiki/testwikis
+    plugin for aligning columns 
+        https://github.com/junegunn/vim-easy-align
+    plugin for dashboard 
+        https://github.com/junegunn/vim-github-dashboard 
+        could be useful for mananging task view
+    plugin for "SubscopeDetector for nested completion" 
+        https://github.com/ncm2/ncm2
+        found at https://github.com/lervag/wiki.vim#features
+        I could be misunderstanding the terminology used
+            but maybe it could be helpful for nested task
+            completion?
+    plugin for simple wiki.vim folding and syntax highlighting
+        https://github.com/lervag/wiki-ft.vim
+        useful as a starting point
+

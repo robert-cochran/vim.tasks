@@ -1,0 +1,7 @@
+task.230220.210613.txt
+- tasks.txt
+
+    FEATURE:    auto word wrap for the column its in, dont want it to wrap
+                back around in the key field (also key isnt really a good name
+                for waht it is, its more like a data type where its
+                describing what the data in the next column is)

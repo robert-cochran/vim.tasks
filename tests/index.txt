@@ -1,0 +1,9 @@
+index.txt
+
+    TASK:       Template population
+    STATUS:     PENDING
+
+    TASK:       syntax coupling
+    CONTEXT:    have syntax highlighting for items change depending on the
+                value used for its corresponding couple
+    

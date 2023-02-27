@@ -1,0 +1,5 @@
+task.230219.195137.txt
+- tasks.txt
+
+    VIM-FEAT    way to auto create task files with incremental task ids based
+                off of whats already been created

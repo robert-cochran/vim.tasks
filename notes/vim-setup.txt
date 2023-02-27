@@ -1,0 +1,21 @@
+
+VIM SYNTAX HIGHLIGHTING
+
+    LINK    https://superuser.com/questions/844004/creating-a-simple-vim-syntax-highlighting
+    FILE    ~/.vimrc
+    FILE    ~/.vim/ftdetect/txt.vim
+    FILE    ~/.vim/syntax/txt.vim
+
+    
+TAB COLUMNS WITH VIM
+
+    LINK    https://superuser.com/questions/667058/how-to-columnize-text-with-tabs-in-vim-or-on-the-shell
+    LINK    https://superuser.com/questions/140084/terminal-window-viewer-for-tab-delimited-files-in-nix
+    LINK    https://stackoverflow.com/questions/3119135/whats-the-best-way-to-rearrange-columns-in-a-tab-delimited-text-file-in-vim
+    LINK    https://unix.stackexchange.com/questions/57222/how-can-i-use-column-to-delimit-on-tabs-and-not-spaces
+    LINK    https://stackoverflow.com/questions/57503993/how-to-organize-columns-in-vim
+    LINK    https://stackoverflow.com/questions/6971903/how-to-do-column-editing-in-vim
+    LINK    https://stackoverflow.com/questions/40451660/vim-aligning-text-to-columns
+    LINK    https://lisakov.com/en/blog/vim-align-table/
+    LINK    https://insimpleterms.blog/1051-2
+    LINK    https://stackoverflow.com/questions/1229900/reformat-in-vim-for-a-nice-column-layout

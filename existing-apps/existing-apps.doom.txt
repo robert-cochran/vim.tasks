@@ -1,0 +1,5 @@
+getting started
+    https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#doom-emacs
+
+    doom emacs day one      https://youtu.be/37H7bD-G7nE?t=924 \\
+    doom emacs for noobs    https://www.youtube.com/watch?v=iab2z21cRqA \\

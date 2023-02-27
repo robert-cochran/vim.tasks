@@ -1,0 +1,14 @@
+
+VIM REGEX
+
+
+    Q:          what is \zs \zb \ze all about
+    HELP:       Vim: Line Following Syntax Match is also a Syntax Match
+        A:      nextgroup - https://stackoverflow.com/questions/58243739/vim-line-following-syntax-match-is-also-a-syntax-match
+    NOTE:       for syntax regex matching, hs and he determine what the exclude from
+                the highlight.
+    EXAMPLE:    syntax match txtPROJ        /PROJECT\s\+\w\+.*/hs=s+1,he=e-1
+                would select "PROJECT   ML FOR DUMMIES" but the first and last
+                chars wouldnt be highlighted
+                region has similar function but called rs and re
+
