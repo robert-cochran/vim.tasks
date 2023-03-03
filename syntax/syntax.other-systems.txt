@@ -1,0 +1,12 @@
+SIMILAR.SYNTAX.EXAMPLES
+   
+    NAME            cornell note taking structure
+    NAME            cornell note taking app         
+                    https://apps.apple.com/us/app/columns-cornell-notes/id1493839821?mt=12
+    NAME            rfc format
+                    https://blog.apnic.net/2021/08/26/a-brief-history-of-the-rfc-format/
+    NAME            taskwarrior-tui
+                    has a very well established system in place for outlining
+                    specific states to colour
+                    https://kdheepak.com/taskwarrior-tui/configuration/colors/
+                    and useful properties related to tasks

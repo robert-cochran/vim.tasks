@@ -1,8 +1,27 @@
 COMMANDS
 
+    CUSTOM-COMMANDS
+    DoneTest
+    DoneTask
+    NewTask
+    MoveWrite
+    MoveAppend
+    .... etc., there are more but thats the idea
+   
+    SELCTING
+    vip         visually select everything inside the paragraph youre in
+    
+
+    INDENTING
     .           in normal mode, this will repeat last command
     >           indents a selection by tab
     <           deindents
+    >>          indenting
+    <<          deindenting 
+
+    FOLD
+    vip         visually select everything inside the paragraph youre in
+    zf          create fold
     zo          open fold
     zc          close fold
     zC          close all folds

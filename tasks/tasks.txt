@@ -1,5 +1,7 @@
 tasks.txt
 
+DONE
+
     TASK!:      task.230213.213422.txt
     TASK!:      task.230219.145955.txt
     TASK!:      task.230219.171717.txt
@@ -18,7 +20,8 @@ tasks.txt
     TASK!:      task.230220.211930.txt
     TASK!:      task.230220.214429.txt
     TASK!:      task.230224.152503.txt
-    
+    TASK!:      task.230228.074151.txt
+    TASK!:      task.230228.074204.txt
 
 SEARCH.TAGGING
 
@@ -80,24 +83,21 @@ VISUAL.OUTLINE
 
 FOLDING
 
-    FEATURE:    would be nice to be able to either fold stories/tasks/subtasks
-                away or have each of them become their own file that will
-                link back up to other files (org-mode seems to have the folding
-                tasks aspect, 
-                Idea being that each of these tasks and subtasks should be
-                written as self contained units with a beginning (context), 
-                middle (notes, debug, Q, TEST, OUTCOME, etc..) and end (STATUS).
-                that way I can keep track of tasks in their own window without
-                needing all the other subtasks and notes necessarily right next
-                to what my current task is. also makes it more standardised 
-                for templates
 
-    FEATURE:    folding up tests down to the next OUTCOME keyword
+    FEATURE:    folding up tests with a shortcut that automatically runs 'vip'
+                (or similar) down to the next OUTCOME keyword
+
+    FEATURE:    adding feature to auto fold blocks? so instead of relying on
+                setting manual fold markers i could develop a syntax for
+                folding instead? honestly might be overkill with how easy it is
+                to do
     
 LINKING
 
-    FEATURE:    bidirectional links. vim wiki seems to have the bi-directional
-                links,
+    FEATURE:    automatic bidirectional links. if enter a filename then I can
+                run a command on that filename that will write my current files
+                filename into the referenced file. (damn be more verbose lmao) 
+                vim wiki seems to have the bi-directional links.
 
 LINKING.BACKLINKS
 
@@ -119,10 +119,35 @@ COLUMNS
                 the top once its found the first instance of TASK: or CTASK:
                 whicher youre changing to or from
 
+LINE.WRAPPING
+
+    FEATURE:    currently vims auto indent only works when you are writing and
+                your cursor hits the word wrap line, which will then send your
+                word down to the next line. but if you write in the middle of a
+                prexisting line then the words AFTER your cursor will happily
+                continue off into the oblivion outside of the word wrap. need
+                to fix this
+
+    FEATURE:    smart indenting is fine but i need a way to make the word wrap
+                ignore the keywords position and wrap under the paragraps
+                position
+
+    IDEA:       in the interim while i figure this out theres some ideas on
+                doing the opposite of SHIFT+j (joining this line with previous
+                line) to join the next line down to here
+                https://groups.google.com/g/vim_use/c/uV1RtJx3FLA
+                https://www.reddit.com/r/vim/comments/fn4ix/what_is_the_opposite_of_j/
+                https://www.reddit.com/r/vim/comments/qt2yyp/vim_powerful_shift_k/ 
+
 KEYWORDS.COUPLES
 
-    FEATURE:    change style of Q once an answer is written below it so that
-                it doesnt stick out as much anymore
+    TASK!:   task.230228.083655.txt
+
+    FEATURE:    shortcut to mark Q as done
+
+    FEATURE:    shortcut to make any keyword as done
+
+    FEATURE:    syntax to mark any keyword ending with ! as done
 
     FEATURE:    continuing on with the related ideas from above there should 
                 be a better way to show coupled items (e.g. test to outcome,
@@ -220,6 +245,15 @@ FILE.DIR.OUTLINE
                 by this task. getting a similar feeling to org roam with the
                 backlinks. might be overkill tbh
 
+    FEATURE:    command that generates a table of contents for a file that
+                might be extra long to show the high level contents like all
+                the words or lines that are at the beginning of the file (e.g.
+                this file for the headers)
+                maybe using nerdtree or something?
+
+    FEATURE:    when a file is made it should add at the top all the files in
+                the ancestory up to TODO.txt
+
 SYNTAX.HIGHTLIGHTING.SPACES
 
     VIM-FEAT    MINOR ISSUE: currently having trouble matching spaces when 
@@ -234,7 +268,12 @@ KEYWORDS.RUN.COMMANDS
 
     VIM-FEAT    for tasks/tests that have run commands underneath them it would
                 be cool to have a way to quickly run that command from vim
-    LINK        https://stackoverflow.com/questions/36956978/run-shell-command-on-visual-selection
+    SOLUTION:   :h K  ----- this runs whatever is underneath it with some
+                program defined by user
+    NOTE:       other shift k examples and use cases (some open help docs for
+                other languages which is cool)
+    LINK:       https://medium.com/code-art/vim-powerful-shift-k-748fec296319
+    LINK        https://stackoverflow.com/quest"ions/36956978/run-shell-command-on-visual-selection
     LINK        https://stackoverflow.com/questions/4268532/how-to-execute-selected-text-as-vim-commands
     LINK        https://www.jvt.me/posts/2022/03/03/vim-command-visual-selection
        
@@ -269,6 +308,10 @@ MACROS
                 for keyword i could do something similar, setting up custom
                 movement to select a keyword and its contents so that I can 
                 change its status (or select it) really quickly
+                !!Don't surf stack overflow for this and contemplate suicide!! 
+                go to the existing vim wiki tasks plugins that already exist 
+                and see how they're doing
+                macros -> commands
 
         IDEA    i could use sh scripts to find, copy, paste into the collection
                 files but only for specific lines and have it auto refresh
@@ -374,3 +417,95 @@ UNSORTED
                 top of the task files to help build a ancestry chain that i can
                 toggle on or off
 
+    FEATURE     way to query a task file and all of its children for things
+                like open tasks, open questions, open todo's, etc... basically
+                turning text files that are well structured enough into a db
+                that can be queried, but still keeping the flexibility of
+                text files
+
+    FEATURE     try out nerdtree, seems like it would be a good addition
+                https://github.com/preservim/nerdtree
+                https://vimawesome.com/plugin/nerdtree
+                http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+                https://shapeshed.com/vim-netrw/
+
+    FEATURE     using replace instead of insert in vimscript function.
+                SO about vim pasting
+                https://unix.stackexchange.com/questions/199203/why-does-vim-indent-pasted-code-incorrectly
+                had this cool hidden comment as a reply to the accepted answer:
+                I usually use :r!cat to paste verbatim.
+                which is a cool way to paste without getting weird formatting
+                issues of compounding indents. the other way to avoid
+                compounding indentation was to use:
+                "+p or "*p
+                
+    FEATURE     tmux to vim pasting issues
+                https://stackoverflow.com/questions/11404800/fix-vim-tmux-yank-paste-on-unnamed-register
+
+    FEATURE     shortcut to go to parent document by looking at the top of the
+                file and selecting the second line (the parent file that sits
+                under the current files filename). it runs a gf on that file
+                and badda bing badda boom we can jump the hierarchy babbyyyy.
+                could even cheekily use motions which is DEFINITELY not robust
+                but something like ggWW'gf', or ggjW'gf', or ggj$b'gf'.
+                could use number of -'s underneath the current filename to
+                denote ancestry level too
+                
+    FEATURE     running the shortcut for the notes (e.g. apnn or kstn) with an
+                argument could search for that file and place you either inside 
+                it if theres only 1, or on top of the first result if theres 2+
+
+    FEATURE     any task or subtask thats created could have markers
+                automatically placed on it so that it can be folded later
+                (actually seems overkill)
+
+    FEATURE     moving a subtask up the chain is very prone to error with
+                moving the filenames around for the ancestry at the top of the
+                file. 
+
+    FEATURE     manual folding seems like it creates fold markers at specific
+                lines of the file. meaning if you make a task with a fold and 
+                move it somehwere else the folds are all out of whack now.
+                for long term either need to come up with system to
+                automatically handle folding based on syntax or reduce need
+                for folding (e.g. making it easier to atomise
+                tasks/questions/rabbit holes/etc..) while not losing track of
+                what information they had to a bunch of anonymous task.uid.txt
+                filenames. foldign is also visually pretty noise and id like to
+                avoid it unless its for the big groups of data like NOTES,
+                TASKS, QUESTIONS, etc..
+                jsut want to stress how good atomising is, but i also want to
+                know where the sweet spot is before it becomes a joke and when
+                its really useful
+    UPDATE:     A better idea is to use fold syntax and create a syntax that
+                defines all paragraphs (i.e. any block of text surrounded by
+                two \n\n above and below) to be foldable. keyword stuff can
+                wait. 
+    UPDATE2:    also any text that starts on the 0 col can be a marker
+                with the end marker being either an EOF or another 0col word
+
+    FEATURE     some automated way to take questions that have been answered
+                and add them to a little collection of 'knowledge' bits. e.g.
+                if id written a question down about where a mntner was across
+                many domains.dbs.tables, the answer would essentially be a self
+                contained little block like a note or something that can be
+                read later. idea here being to capitalize on knowledge captured
+                earlier but forgotten about later
+
+    IDEA        to do the wordwrap in specific text column I want (e.g. 17-80
+                in this doc for example) i could have not only a word wrap=79
+                but also a word wrap start? checkout the :h textwidth doc for
+                more ideas, and :h wrapmargin. 
+                also this site explains why lines go past the wordwrap limit
+                when inserting text
+                https://vim.fandom.com/wiki/Automatic_word_wrapping
+
+    FEATURE     what would actually be super useful would be automatic moving
+                of highlighted blocks. so that all answered questions can be
+                marked off, folded and stuck under a header (e.g.
+                QUESTIONS.ANSWERED). would be cool to combine this with the
+                macro that changes the question from done and folds it up.
+                maybe change the function to Answered and then figure out how
+                to find the beginning and ending of a header section so that i
+                can whack it at the end without having to manually shuffle
+                around and add newlines everywhere. 

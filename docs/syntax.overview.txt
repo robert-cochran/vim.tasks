@@ -1,0 +1,39 @@
+syntax-overview.txt
+
+SYNTAX/SETTINGS
+    
+    TASK:
+    CTASK:
+    SUBTASK:
+    CSUBTASK:
+    TODO            light green foreground and italic
+    Q:
+    Q!:
+    RUN:             light blue italic
+    TEST:
+    STATUS: SUCCESS green background
+    STATUS: FAIL    red background
+    STATUS: PENDING purple background
+    !! dynamic highlight !!
+    ?? dynamic 
+    highlight ??
+
+SYNTAX.IDEAS
+    
+    ERROR:            red italic
+    RECAP
+    WARNING
+    FIX
+    NOTE
+    SECTION
+    IDEA
+    DEBUG           light gold
+    TERMS
+    TROUBLESHOOTING
+    RESOURCES
+    EXPLORATION
+    README
+    QUESTION        ?
+        ANSWER
+    FIXME?
+

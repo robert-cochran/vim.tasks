@@ -1,0 +1,13 @@
+task.230228.074204.txt
+- tasks.txt
+
+    FEATURE:    would be nice to have each task/test become their own file that
+                will if need be that will link back up to other files 
+                (org-mode seems to have the folding tasks aspect) 
+                Idea being that each of these tasks and subtasks should be
+                written as self contained units with a beginning (context), 
+                middle (notes, debug, Q, TEST, OUTCOME, etc..) and end (STATUS).
+                that way I can keep track of tasks in their own window without
+                needing all the other subtasks and notes necessarily right next
+                to what my current task is. also makes it more standardised 
+                for templates
